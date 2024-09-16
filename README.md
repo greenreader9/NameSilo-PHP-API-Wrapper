@@ -75,7 +75,9 @@ Two ways you can do this:
 
 ### What Validation is done?
 
-Pretty much none. Any mistakes are sent to the NameSilo API, and it will (hopefully) return a helpful error message. See [API Errors Here](https://www.namesilo.com/api-reference) -> Click `Responce Codes`
+Pretty much none. It does check that you used the bulkAPI for `registerDomainDrop`, and that you are not trying to call the `bidAuctions` function. It also requires that you send in all paramaters that NameSilo marks as always required.
+
+Any other mistakes are sent to the NameSilo API, and it will (hopefully) return a helpful error message. See [API Errors Here](https://www.namesilo.com/api-reference) -> Click `Responce Codes`
 
 ## How to read the responce? 
 
@@ -133,6 +135,15 @@ $api->getLastCall();
 // NEVER USE IN PRODUCTION!
 $api->getLastURL();
 ~~~
+
+## Make a PR
+
+Obviously there is not much here in terms of code. To make a PR, just fix the bug / add the endpoint / do what you want to do, then open a PR and type the following:
+
+1. What you did (Added the new API endpoint someEndpoint)
+2. Where I can verify your work, if needed (https://www.namesilo.com/api-reference#cat/some-endpoint)
+3. A programming joke (Not neceasry, but humor is generally a good thing)
+4. Anything else you feel like sharing
 
 
 ## Get Support
