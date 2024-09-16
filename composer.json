@@ -1,5 +1,5 @@
 {
-  "name": "greenreader9/NameSiloAPI",
+  "name": "greenreader9/namesilo-php-api",
   "description": "PHP Wrapper for the NameSilo API",
   "minimum-stability": "stable",
   "license": "MIT",
