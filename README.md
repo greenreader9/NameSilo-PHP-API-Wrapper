@@ -13,7 +13,7 @@ That said, it _should_ work, but I don't gartentee it. Open a [Issue](https://gi
 
 Install via Composer:
 
-> composer install greenreader9/namesilo-php-api
+> composer require greenreader9/namesilo-php-api
 
 Or grab the /src/NameSiloAPI.php file, that works too
 
