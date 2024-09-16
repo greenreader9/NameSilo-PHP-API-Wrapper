@@ -360,17 +360,7 @@ class NameSiloAPI{
 
 	///////////////////// Domain Transfers /////////////////
 
-	// https://www.namesilo.com/api-reference#transfers/transfer-domain
-	// domain required
-	function transferDomain($domain, $payment_id=null, $auth=null, $private=null, $auto_renew=null, $portfolio=null, $coupon=null, $fn=null, $ln=null, $ad=null, $cy=null, $st=null, $zp=null, $ct=null, $em=null, $ph=null, $nn=null, $cp=null, $ad2=null, $fx=null, $usnc=null, $usap=null, $contact_id=null){
-		$variables = get_defined_vars();
-		
-		$filteredVariables = array_filter($variables, function($value) {
-		    return $value !== null;
-		});
-
-		return $this->cURLCall('transferDomain', $this->buildParam($filteredVariables));
-	}
+	// more functions under domains header
 
 	//https://www.namesilo.com/api-reference#transfers/check-transfer-status
 	// all required
@@ -787,17 +777,7 @@ class NameSiloAPI{
 		return $this->cURLCall('emailVerification', $this->buildParam($filteredVariables));
 	}
 
-	// https://www.namesilo.com/api-reference#email/transfer-update
-	// all required
-	function transferUpdateResendAdminEmail($domain){
-		$variables = get_defined_vars();
-		
-		$filteredVariables = array_filter($variables, function($value) {
-		    return $value !== null;
-		});
-
-		return $this->cURLCall('transferUpdateResendAdminEmail', $this->buildParam($filteredVariables));
-	}
+	// more functions under domain transfers header
 
 	/////////////////////// Marketplace ///////////////
 
