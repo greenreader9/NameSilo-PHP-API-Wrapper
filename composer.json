@@ -13,8 +13,6 @@
     "php": ">=7.1"
   },
   "autoload": {
-    "psr-4": {
-      "Greenreader9\\NameSiloAPI\\": "src/"
-    }
+    "classmap": ["src"]
   }
 }
