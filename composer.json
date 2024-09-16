@@ -1,0 +1,19 @@
+{
+  "name": "greenreader9/NameSiloAPI",
+  "description": "PHP Wrapper for the NameSilo API",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "GREENREADER9",
+      "email": "hello@tinkertechlab.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Greenreader9\\NameSiloAPI\\": "src/"
+  }
+}
