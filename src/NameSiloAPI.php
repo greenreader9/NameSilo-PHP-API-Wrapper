@@ -807,7 +807,7 @@ class NameSiloAPI{
 
 	// https://www.namesilo.com/api-reference#marketplace/marketplace-landing-page-update
 	// domain required
-	function marketplaceLandingPageUpdate($domain, $mp_template=null, $mp_bgcolor=null, $mp_textcolor=null, $mp_show_buy_now=null, $mp_show_more_info=null, $mp_show_renewal_price=null, $mp_show_other_for_sale=null, $mp_other_domain_links=null, $mp_message){
+	function marketplaceLandingPageUpdate($domain, $mp_template=null, $mp_bgcolor=null, $mp_textcolor=null, $mp_show_buy_now=null, $mp_show_more_info=null, $mp_show_renewal_price=null, $mp_show_other_for_sale=null, $mp_other_domain_links=null, $mp_message=null){
 		$variables = get_defined_vars();
 		
 		$filteredVariables = array_filter($variables, function($value) {
