@@ -491,7 +491,7 @@ class NameSiloAPI{
 
 	// https://www.namesilo.com/api-reference#nameserver/change-nameserver
 	// first 3 required 
-	function changeNameServers($domain, $na1, $ns2, $ns3=null, $ns4=null, $ns5=null, $ns6=null, $ns7=null, $ns8=null, $ns9=null, $ns10=null, $ns11=null, $ns12=null, $ns13=null){
+	function changeNameServers($domain, $ns1, $ns2, $ns3=null, $ns4=null, $ns5=null, $ns6=null, $ns7=null, $ns8=null, $ns9=null, $ns10=null, $ns11=null, $ns12=null, $ns13=null){
 		$variables = get_defined_vars();
 		
 		$filteredVariables = array_filter($variables, function($value) {
