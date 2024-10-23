@@ -27,7 +27,7 @@ use Greenreader9\NameSiloAPI;
 
 $api = new NameSiloAPI('your-api-key', 'application-name', 'bulk', 'ote');
 ~~~
-`new NameSiloAPI($apiKey, $UserAgent, $BulkORnormal)`
+`new NameSiloAPI($apiKey, $UserAgent, $BulkORnormal, $SandboxURL)`
 
 `apiKey` is your NameSilo API key. Don't share with others
 
