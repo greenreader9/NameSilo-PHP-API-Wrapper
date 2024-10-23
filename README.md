@@ -25,7 +25,7 @@ Or grab the /src/NameSiloAPI.php file, that works too
 require_once __DIR__.'/vendor/autoload.php';
 use Greenreader9\NameSiloAPI;
 
-$api = new NameSiloAPI('your-api-key', 'application-name', 'bulk');
+$api = new NameSiloAPI('your-api-key', 'application-name', 'bulk', 'ote');
 ~~~
 `new NameSiloAPI($apiKey, $UserAgent, $BulkORnormal)`
 
@@ -33,9 +33,13 @@ $api = new NameSiloAPI('your-api-key', 'application-name', 'bulk');
 
 `UserAgent` is the name of your application. Keep it short and descriptive
 
-`BulkORnormal` Set to `bulk` to use the [BulkAPI](https://www.namesilo.com/support/v2/articles/account-options/api-automated-batch), null or `normal` to use the normal API
+`BulkORnormal` (Optional) Set to `bulk` to use the [BulkAPI](https://www.namesilo.com/support/v2/articles/account-options/api-automated-batch), null or `normal` to use the normal API
+
+`SandboxURL` (Optional) Set to `false` or omit for production use. Setting to any other value will set your API call to https://`VALUE`/namesilo.com/`BULK/NORMAL`
 
 TIP: All commands can use either API type except the `registerDomainDrop` command, which requires the bulk API
+
+TIP: Sandbox mode does not work during drop/catch times, and does not work with the `registerDomainDrop` command
 
 3. Call a function:
 ~~~php
