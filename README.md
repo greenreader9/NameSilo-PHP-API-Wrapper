@@ -33,7 +33,7 @@ $api = new NameSiloAPI('your-api-key', 'application-name', 'bulk', 'ote');
 
 `UserAgent` is the name of your application. Keep it short and descriptive
 
-`BulkORnormal` (Optional) Set to `bulk` to use the [BulkAPI](https://www.namesilo.com/support/v2/articles/account-options/api-automated-batch), null or `normal` to use the normal API
+`BulkORnormal` (Optional) Set to `"bulk"` to use the [BulkAPI](https://www.namesilo.com/support/v2/articles/account-options/api-automated-batch), `null` or `"normal"` to use the normal API
 
 `SandboxURL` (Optional) Set to `false` or omit for production use. Setting to any other value will set your API call to https://`VALUE`/namesilo.com/`BULK/NORMAL`
 
