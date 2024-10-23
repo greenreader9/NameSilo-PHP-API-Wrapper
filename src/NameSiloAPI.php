@@ -20,8 +20,8 @@ namespace Greenreader9;
 class NameSiloAPI{
 	private $apikey;
 	private $ua;
-	private $normalURL = 'https://www.namesilo.com/api/'; // final
-	private $bulkURL = 'https://www.namesilo.com/apibatch/'; // final
+	private $URLsuffix = 'api/'; // api/ OR apibatch/
+	private $URLprefix = 'https://www'; // https://www OR https://<sandboxValue>
 	private $currURL;
 
 	private $lastHTTP = NULL;
@@ -34,15 +34,24 @@ class NameSiloAPI{
 	// An API key, User Agent MUST be provided when the class is called. 
 	// These can be changed later by calling setKey() and setUA() respectively 
 	// A third param can be set to 'bulk' to use the bulk API. Set it to any other value for the normal url
-	function __construct($apiKey, $userAgent, $apiType='normal'){
+	// A fourth param can be set to a value to use that sandbox subdomain.
+	function __construct($apiKey, $userAgent, $apiType='normal', $isSandbox=null){
 		$this->apikey = $apiKey;
 		$this->ua = $userAgent;
 
 		if($apiType == 'bulk'){
-			$this->currURL = $this->bulkURL;
+			$this->URLsuffix = 'apibatch/';
 		} else{
-			$this->currURL = $this->normalURL;
+			$this->URLsuffix = 'api/';
 		}
+
+		if(empty($isSandbox)){
+			$this->URLprefix = 'https://www';
+		} else{
+			$this->URLprefix = 'https://'.$isSandbox;
+		}
+
+		$this->currURL = $this->URLprefix.'.namesilo.com/'.$this->URLsuffix;
 	}
 
 	// Set your API key --REQUIRED
@@ -57,12 +66,22 @@ class NameSiloAPI{
 
 	// change the URL type
 	// pass 'bulk' to use bulk URL. Ignore param or set it to any other value for the normal url
-	function setAPIType($apiType='normal'){
+	// A second param can be set to a value to use that sandbox subdomain.
+	function setAPIType($apiType='normal', $isSandbox=null){
+
 		if($apiType == 'bulk'){
-			$this->currURL = $this->bulkURL;
+			$this->URLsuffix = 'apibatch/';
 		} else{
-			$this->currURL = $this->normalURL;
+			$this->URLsuffix = 'api/';
 		}
+
+		if(empty($isSandbox)){
+			$this->URLprefix = 'https://www';
+		} else{
+			$this->URLprefix = 'https://'.$isSandbox;
+		}
+
+		$this->currURL = $this->URLprefix.'.namesilo.com/'.$this->URLsuffix;
 	}
 
 
@@ -104,6 +123,8 @@ class NameSiloAPI{
 			return '<namesilo><request><operation>API CALL</operation><ip>0.0.0.0</ip></request><reply><code>100</code><detail>BULK API MUST BE USED FOR THIS COMMAND - SET WITH setAPIType("bulk") - API CLIENT ERROR</detail></reply></namesilo>';
 		} elseif($type == 'nosupport'){
 			return '<namesilo><request><operation>API CALL</operation><ip>0.0.0.0</ip></request><reply><code>100</code><detail>API ENDPOINT NOT SUPPORTED BY CLIENT - API CLIENT ERROR</detail></reply></namesilo>';
+		} elseif($type == 'sandboxDrop'){
+			return '<namesilo><request><operation>API CALL</operation><ip>0.0.0.0</ip></request><reply><code>100</code><detail>SANDBOX CANNOT BE USED FOR THIS METHOD</detail></reply></namesilo>';
 		} else{
 			return '<namesilo><request><operation>API CALL</operation><ip>0.0.0.0</ip></request><reply><code>100</code><detail>UNKNOWN API CLIENT ERROR</detail></reply></namesilo>';
 		}
@@ -161,6 +182,10 @@ class NameSiloAPI{
 	// https://www.namesilo.com/api-reference#domains/register-domain-drop
 	// domain, years required
 	function registerDomainDrop($domain, $years, $private=null, $auto_renew=null){
+
+		if($this->URLprefix != 'https://www'){
+			return $this->returnBAD('sandboxDrop');
+		}
 
 		if($this->currURL != $this->bulkURL){
 			return $this->returnBAD('reqBulk');
