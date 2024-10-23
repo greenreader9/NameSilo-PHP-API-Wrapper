@@ -37,9 +37,9 @@ $api = new NameSiloAPI('your-api-key', 'application-name', 'bulk', 'ote');
 
 `SandboxURL` (Optional) Set to `false` or omit for production use. Setting to any other value will set your API call to https://`VALUE`/namesilo.com/`BULK/NORMAL`
 
-TIP: All commands can use either API type except the `registerDomainDrop` command, which requires the bulk API
+> TIP: All commands can use either API type except the `registerDomainDrop` command, which requires the bulk API
 
-TIP: Sandbox mode does not work during drop/catch times, and does not work with the `registerDomainDrop` command
+> TIP: Sandbox mode does not work during drop/catch times, and does not work with the `registerDomainDrop` command
 
 3. Call a function:
 ~~~php
