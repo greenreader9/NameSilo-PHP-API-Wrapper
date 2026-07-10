@@ -85,26 +85,23 @@ Any other mistakes are sent to the NameSilo API, and it will (hopefully) return 
 
 ## How to read the responce? 
 
-You get the responce as a PHP object (No, I won't provide you support with parsing it, ask Google or consult a PHP book)
+You get the responce as a SimpleXMLElement PHP object
 
 Example for the `listDomains` call:
-~~~
-object(SimpleXMLElement)#3 (2) {
-  ["request"]=> object(SimpleXMLElement)#2 (2) {
-    ["operation"]=> string(11) "listDomains"
-    ["ip"]=> string(13) "0.0.0.0"
-  }
-  ["reply"]=> object(SimpleXMLElement)#4 (3) {
-    ["code"]=> string(3) "300"
-    ["detail"]=> string(7) "success"
-    ["domains"]=> object(SimpleXMLElement)#5 (1) {
-      ["domain"]=> array(5) {
-        [0]=> string(14) "domain1.com"
-        [1]=> string(14) "domain2.net"
-        [2]=> string(10) "domain3.top"
-        [3]=> string(14) "domain4.net"
-        [4]=> string(17) "domain5.com"
-      }
+~~~txt
+object(SimpleXMLElement)#63 (3) {
+  ["code"]=>
+  string(3) "300"
+  ["detail"]=>
+  string(7) "success"
+  ["available"]=>
+  object(SimpleXMLElement)#61 (1) {
+    ["domain"]=>
+    array(17) {
+      [0]=>
+      string(13) "example.com"
+      [1]=>
+      string(13) "example.org"
     }
   }
 }
@@ -116,8 +113,50 @@ And the code that made that responce:
 require_once __DIR__.'/vendor/autoload.php';
 use Greenreader9\NameSiloAPI;
 $api = new NameSiloAPI('xxxxxxxxxxxx', 'My Awesome Application', 'bulk');
+$api_response = $api->checkRegisterAvailability('example.com,example.org');
 var_dump($api->listDomains());
 ?>
+~~~
+
+If the NameSilo API provides additional information as XML attributes for the call, you check the documentation, or view them like:
+~~~php
+foreach ($nsapi_register->available->domain as $domain){
+  var_dump($domain);
+}
+~~~
+
+Which will return something like:
+~~~txt
+object(SimpleXMLElement)#56 (2) {
+  ["@attributes"]=>
+  array(4) {
+    ["price"]=>
+    string(5) "11.05"
+    ["renew"]=>
+    string(5) "11.05"
+    ["premium"]=>
+    string(1) "0"
+    ["duration"]=>
+    string(2) "10"
+  }
+  [0]=>
+  string(13) "example.com"
+}
+~~~
+
+To access an attribute (Like "price" in our example), use can do:
+~~~php
+foreach ($nsapi_register->available->domain as $domain){
+  var_dump($domain['price']);
+}
+~~~
+
+which will return something like:
+~~~txt
+object(SimpleXMLElement)#62 (1) {
+  [0]=>
+  string(5) "11.05"
+}
 ~~~
 
 See more about the responce for the API call you are making by reading the [NameSilo API docs](https://www.namesilo.com/api-reference)
