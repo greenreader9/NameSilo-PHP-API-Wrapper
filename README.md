@@ -87,7 +87,7 @@ Any other mistakes are sent to the NameSilo API, and it will (hopefully) return 
 
 You get the responce as a SimpleXMLElement PHP object
 
-Example for the `listDomains` call:
+Example for the `checkRegisterAvailability` call:
 ~~~txt
 object(SimpleXMLElement)#63 (3) {
   ["code"]=>
@@ -120,7 +120,7 @@ var_dump($api->listDomains());
 
 If the NameSilo API provides additional information as XML attributes for the call, you check the documentation, or view them like:
 ~~~php
-foreach ($nsapi_register->available->domain as $domain){
+foreach ($api_response->available->domain as $domain){
   var_dump($domain);
 }
 ~~~
@@ -146,7 +146,7 @@ object(SimpleXMLElement)#56 (2) {
 
 To access an attribute (Like "price" in our example), use can do:
 ~~~php
-foreach ($nsapi_register->available->domain as $domain){
+foreach ($api_response->available->domain as $domain){
   var_dump($domain['price']);
 }
 ~~~
