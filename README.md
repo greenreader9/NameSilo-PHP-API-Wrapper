@@ -9,8 +9,6 @@ This class was created for private use, but has been released under the MIT lice
 
 That said, it _should_ work, but I don't gartentee it. Open a [Issue](https://github.com/greenreader9/NameSilo-PHP-API-Wrapper/issues) or [PR](https://github.com/greenreader9/NameSilo-PHP-API-Wrapper/pulls) to fix any bugs.
 
-> This library was updated to use NameSilo's JSON API in July 2026. Use a v1 version of this library for the XML version.
-
 ## Install Me
 
 Install via Composer:
@@ -87,42 +85,26 @@ Any other mistakes are sent to the NameSilo API, and it will (hopefully) return 
 
 ## How to read the responce? 
 
-You get the responce as a basic PHP object (No, I won't provide you support with parsing it, ask Google or consult a PHP book)
+You get the responce as a PHP object (No, I won't provide you support with parsing it, ask Google or consult a PHP book)
 
-Example for the `checkRegisterAvailability` call:
+Example for the `listDomains` call:
 ~~~
-object(stdClass)#56 (3) {
-  ["code"]=>
-  int(300)
-  ["detail"]=>
-  string(7) "success"
-  ["available"]=>
-  array(17) {
-    [0]=>
-    object(stdClass)#60 (5) {
-      ["domain"]=>
-      string(13) "example.com"
-      ["price"]=>
-      float(11.05)
-      ["renew"]=>
-      float(11.05)
-      ["premium"]=>
-      int(0)
-      ["duration"]=>
-      int(10)
-    }
-    [1]=>
-    object(stdClass)#58 (5) {
-      ["domain"]=>
-      string(13) "example.org"
-      ["price"]=>
-      float(13.49)
-      ["renew"]=>
-      float(13.49)
-      ["premium"]=>
-      int(0)
-      ["duration"]=>
-      int(10)
+object(SimpleXMLElement)#3 (2) {
+  ["request"]=> object(SimpleXMLElement)#2 (2) {
+    ["operation"]=> string(11) "listDomains"
+    ["ip"]=> string(13) "0.0.0.0"
+  }
+  ["reply"]=> object(SimpleXMLElement)#4 (3) {
+    ["code"]=> string(3) "300"
+    ["detail"]=> string(7) "success"
+    ["domains"]=> object(SimpleXMLElement)#5 (1) {
+      ["domain"]=> array(5) {
+        [0]=> string(14) "domain1.com"
+        [1]=> string(14) "domain2.net"
+        [2]=> string(10) "domain3.top"
+        [3]=> string(14) "domain4.net"
+        [4]=> string(17) "domain5.com"
+      }
     }
   }
 }
@@ -134,7 +116,7 @@ And the code that made that responce:
 require_once __DIR__.'/vendor/autoload.php';
 use Greenreader9\NameSiloAPI;
 $api = new NameSiloAPI('xxxxxxxxxxxx', 'My Awesome Application', 'bulk');
-var_dump($api->checkRegisterAvailability('example.com,example.org'));
+var_dump($api->listDomains());
 ?>
 ~~~
 
